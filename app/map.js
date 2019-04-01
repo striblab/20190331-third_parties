@@ -525,63 +525,63 @@ class Map {
                     ];
 
             //draw shift lines
-            self.g.selectAll(".centroid").data(centroids)
-                .enter().append("line")
-                .attr("stroke", function(d, i) {
-                    if (features[i].properties.shifts_shift == "D") {
-                        // if (features[i].properties.shifts_shift_pct < 0.05) { return "#D1E6E1"; }
-                        // else if (features[i].properties.shifts_shift_pct < 0.1) { return "#67B4C2"; }
-                        // else if (features[i].properties.shifts_shift_pct < 0.2) { return "#3580A3"; }
-                        return "#0258A0";
-                    } else {
-                        // if (features[i].properties.shifts_shift_pct < 0.05) { return "#F2AC93"; }
-                        // else if (features[i].properties.shifts_shift_pct < 0.1) { return "#F2614C"; }
-                        // else if (features[i].properties.shifts_shift_pct < 0.2) { return "#C22A22"; }
-                        return "#8c0808";
-                    }
-                    })
-                .attr("stroke-width", function(d) {
-                    if (race == "3"){ return "0.1px"; }
-                    else if (race == "2") { return "0.2px"; }
-                    else { return "0.5px"; }
-                })
-                .attr("class", "shifter")
-                .attr("id", function(d, i) {
-                    return "arrow" + features[i].properties.join;;
-                })
-                // .style("opacity",0)
-                .attr("x1", function(d) {
-                    return d[0];
-                })
-                .attr("y1", function(d) {
-                    return d[1];
-                })
-                .attr("x2", function(d, i) {
-                    var divider = 3;
-                    if (race == "2") { divider = 1; }
-                    else if (race == "3") { divider = -0.5; }
+            // self.g.selectAll(".centroid").data(centroids)
+            //     .enter().append("line")
+            //     .attr("stroke", function(d, i) {
+            //         if (features[i].properties.shifts_shift == "D") {
+            //             // if (features[i].properties.shifts_shift_pct < 0.05) { return "#D1E6E1"; }
+            //             // else if (features[i].properties.shifts_shift_pct < 0.1) { return "#67B4C2"; }
+            //             // else if (features[i].properties.shifts_shift_pct < 0.2) { return "#3580A3"; }
+            //             return "#0258A0";
+            //         } else {
+            //             // if (features[i].properties.shifts_shift_pct < 0.05) { return "#F2AC93"; }
+            //             // else if (features[i].properties.shifts_shift_pct < 0.1) { return "#F2614C"; }
+            //             // else if (features[i].properties.shifts_shift_pct < 0.2) { return "#C22A22"; }
+            //             return "#8c0808";
+            //         }
+            //         })
+            //     .attr("stroke-width", function(d) {
+            //         if (race == "3"){ return "0.1px"; }
+            //         else if (race == "2") { return "0.2px"; }
+            //         else { return "0.5px"; }
+            //     })
+            //     .attr("class", "shifter")
+            //     .attr("id", function(d, i) {
+            //         return "arrow" + features[i].properties.join;;
+            //     })
+            //     // .style("opacity",0)
+            //     .attr("x1", function(d) {
+            //         return d[0];
+            //     })
+            //     .attr("y1", function(d) {
+            //         return d[1];
+            //     })
+            //     .attr("x2", function(d, i) {
+            //         var divider = 3;
+            //         if (race == "2") { divider = 1; }
+            //         else if (race == "3") { divider = -0.5; }
 
-                    if (features[i].properties.shifts_shift == "D") {
-                        return d[0] - (divider + (features[i].properties.shifts_shift_pct / 3)) ;
-                    } else {
-                        return d[0] + ((divider + features[i].properties.shifts_shift_pct / 3));
-                    }
-                })
-                .attr("y2", function(d, i) {
-                    var divider = 3;
-                    if (race == "2") { divider = 2; }
-                    else if (race == "3") { divider = 1; }
-                    else if (race == "8") { divider = 2; }
+            //         if (features[i].properties.shifts_shift == "D") {
+            //             return d[0] - (divider + (features[i].properties.shifts_shift_pct / 3)) ;
+            //         } else {
+            //             return d[0] + ((divider + features[i].properties.shifts_shift_pct / 3));
+            //         }
+            //     })
+            //     .attr("y2", function(d, i) {
+            //         var divider = 3;
+            //         if (race == "2") { divider = 2; }
+            //         else if (race == "3") { divider = 1; }
+            //         else if (race == "8") { divider = 2; }
 
-                    return (d[1] - divider);
-                })
-                .attr("marker-end", function(d, i) {
-                    if (features[i].properties.shifts_shift == "D") {
-                        return "url(#arrowD)";
-                    } else {
-                        return "url(#arrowR)";
-                    }
-                    });
+            //         return (d[1] - divider);
+            //     })
+            //     .attr("marker-end", function(d, i) {
+            //         if (features[i].properties.shifts_shift == "D") {
+            //             return "url(#arrowD)";
+            //         } else {
+            //             return "url(#arrowR)";
+            //         }
+            //         });
 
             //Draw city labels
             // self.svg.selectAll("circle")
