@@ -53,6 +53,7 @@ utils.environmentNoting();
 
 import d3 from 'd3';
 import Map from './map.js';
+import data from '.'
 
 const map1 = new Map("#map1");
 const map2 = new Map("#map2");
