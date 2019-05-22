@@ -53,27 +53,19 @@ utils.environmentNoting();
 
 import d3 from 'd3';
 import Map from './map.js';
-import data from '.'
+import dataLoad from '../sources/results.json'
 
-const map1 = new Map("#map1");
 const map2 = new Map("#map2");
-const map3 = new Map("#map3");
-const map8 = new Map("#map8");
 
-map1.render("CD1", "mn", "GOP", "all", "1", null);
 map2.render("CD2", "mn", "GOP", "all", "2", null);
-map3.render("CD3", "mn", "GOP", "all", "3", null);
-map8.render("CD8", "mn", "GOP", "all", "8", null);
 
-//call in our JSON data file
-d3.json('test_data.json', function(error, dataLoad){
 
     //load data into a variable
-    var dataAlphabet = dataLoad.alphabet;
+    var data = dataLoad.results;
     
     //D3 data population loop
     d3.select('#table').selectAll('.letter')
-        .data(dataAlphabet)
+        .data(data)
         // .data(dataAlphabet.sort(function(x, y){ return d3.descending(x.letter, y.letter); }))
         // .data(dataAlphabet.filter(function(d){ return d.letter != "X"; }))
         .enter()
@@ -95,4 +87,3 @@ d3.json('test_data.json', function(error, dataLoad){
             //write contents to div
             return d.letter;
         });
-    });
