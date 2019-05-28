@@ -51,7 +51,7 @@ utils.environmentNoting();
 //   }
 // });
 
-import d3 from 'd3';
+import * as d3 from 'd3';
 import Map from './map.js';
 import dataLoad from '../sources/results.json'
 
@@ -62,19 +62,14 @@ map2.render("CD2", "mn", "GOP", "all", "2", null);
 
     //load data into a variable
     var data = dataLoad.results;
-    
+
     //D3 data population loop
-    d3.select('#table').selectAll('.letter')
+    d3.select('#table').selectAll('.contest-table')
         .data(data)
         // .data(dataAlphabet.sort(function(x, y){ return d3.descending(x.letter, y.letter); }))
         // .data(dataAlphabet.filter(function(d){ return d.letter != "X"; }))
         .enter()
         .append('div')
-    
-        .attr('id', function(d) {
-            //return any ID here
-            return d.letter;
-        })
         .attr('class', function(d) {
             //assign letter class
             return 'letter';
@@ -85,5 +80,5 @@ map2.render("CD2", "mn", "GOP", "all", "2", null);
         })
         .html(function(d) {
             //write contents to div
-            return d.letter;
+            return '<div class="cell td">' + d.COMBINE16 + '</div><div class="cell td">' + d.CRAIG_18 + '</div><div class="cell td">' + d.DFL_DIFF + '</div><div class="cell td">' + d.GOP_DIFF + '</div>';
         });
