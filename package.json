@@ -15,6 +15,7 @@
     "node": ">=8.9.0"
   },
   "dependencies": {
+    "c3": "^0.7.1",
     "d3": "^5.8.0",
     "intersection-observer": "^0.5.1",
     "lodash": "^4.17.5",

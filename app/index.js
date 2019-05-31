@@ -53,32 +53,35 @@ utils.environmentNoting();
 
 import * as d3 from 'd3';
 import Map from './map.js';
+import CrossChart from './cross.js';
 import dataLoad from '../sources/results.json'
 
 const map2 = new Map("#map2");
+const chart4 = new CrossChart('#chart');
 
 map2.render("CD2", "mn", "GOP", "all", "2", null);
+chart4.render();
 
 
-    //load data into a variable
-    var data = dataLoad.results;
+    // //load data into a variable
+    // var data = dataLoad.results;
 
-    //D3 data population loop
-    d3.select('#table').selectAll('.contest-table')
-        .data(data)
-        // .data(dataAlphabet.sort(function(x, y){ return d3.descending(x.letter, y.letter); }))
-        // .data(dataAlphabet.filter(function(d){ return d.letter != "X"; }))
-        .enter()
-        .append('div')
-        .attr('class', function(d) {
-            //assign letter class
-            return 'letter';
-        })
-        .style('color',function(d) {
-            //assign color style
-            return '#880000';
-        })
-        .html(function(d) {
-            //write contents to div
-            return '<div class="cell td">' + d.COMBINE16 + '</div><div class="cell td">' + d.CRAIG_18 + '</div><div class="cell td">' + d.DFL_DIFF + '</div><div class="cell td">' + d.GOP_DIFF + '</div>';
-        });
+    // //D3 data population loop
+    // d3.select('#table').selectAll('.contest-table')
+    //     .data(data)
+    //     // .data(dataAlphabet.sort(function(x, y){ return d3.descending(x.letter, y.letter); }))
+    //     // .data(dataAlphabet.filter(function(d){ return d.letter != "X"; }))
+    //     .enter()
+    //     .append('div')
+    //     .attr('class', function(d) {
+    //         //assign letter class
+    //         return 'letter';
+    //     })
+    //     .style('color',function(d) {
+    //         //assign color style
+    //         return '#880000';
+    //     })
+    //     .html(function(d) {
+    //         //write contents to div
+    //         return '<div class="cell td">' + d.COMBINE16 + '</div><div class="cell td">' + d.CRAIG_18 + '</div><div class="cell td">' + d.DFL_DIFF + '</div><div class="cell td">' + d.GOP_DIFF + '</div>';
+    //     });
