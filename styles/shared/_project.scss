@@ -735,6 +735,11 @@ h2 {
  /* Base JeffChart styles */
   .chart {
       margin-top:10px;
+      pointer-events:none !important;
+ }
+
+ .chart .overlay {
+    pointer-events:none !important
  }
 
  .chatter { 
