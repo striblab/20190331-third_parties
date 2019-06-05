@@ -25,7 +25,7 @@ class CrossChart {
             padding: padding,
             data: {
                 columns: [
-                    ['percentage', 0.31,0.65,0.04]
+                    ['percentage', 0.04,0.65,0.31]
                 ],
                 type: 'bar',
                 labels: {
