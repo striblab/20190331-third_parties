@@ -17,23 +17,8 @@ class Map {
         this.zoomed = false;
         this.scaled = $(target).width() / 520;
         this.colorScale = d3.scaleOrdinal()
-            .domain(['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'r1', 'r2', 'r3', 'r4'])
-            .range(['#83bc6d', '#82bae0', '#9d6cb2', '#3b7062', '#999999', '#7f98aa', '#eb6868', '#d6d066', '#F2D2A4', '#ed61a7']);
-        this.colorScale2 = d3.scaleOrdinal()
-            .domain(['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'r1', 'r2', 'r3', 'r4'])
-            .range(['#83bc6d', '#82bae0', '#9d6cb2', '#3b7062', '#999999', '#7f98aa', '#eb6868', '#d6d066', '#F2D2A4', '#ed61a7']);
-        this.red2red = d3.scaleLinear()
-            .domain([0,0.5])
-            .range(['#db655e', '#8C1B17']);
-            this.red2blue = d3.scaleLinear()
-            .domain([0,0.5])
-            .range(['#db655e', '#dd3497']);
-        this.blue2blue = d3.scaleLinear()
-            .domain([0,0.5])
-            .range(['#ABCEE8', '#4f97c4']);
-        this.blue2red = d3.scaleLinear()
-            .domain([0,0.5])
-            .range(['#ABCEE8', '#413374']);
+            .domain(['LESS', 'EVEN', 'MORE'])
+            .range(['#F2AF80', '#857AAA', '#9EE384']);
     }
 
     /********** PRIVATE METHODS **********/
@@ -190,25 +175,7 @@ class Map {
 
                 if (d.properties.shifts_shift_pct != 0 && d.properties.shifts_shift_pct != null && d.properties.shifts_shift_pct != "null") {
                     return '<h4 id="title">' + d.properties.PCTNAME + '</h4> \
-                      <div id="shifter" class="' + (d.properties.shifts_shift == 'D' ? 'd' : 'r') + '">' + shifter + '</div> \
-                      <table> \
-                        <thead> \
-                          <tr> \
-                            <th>Winner 2018</th> \
-                            <th class="right">Pct.</th> \
-                          </tr> \
-                        </thead> \
-                        <tbody> \
-                          <tr> \
-                            <td><span class="' + (party1 == 'GOP' ? 'label-r' : 'label-d') + '"></span>' + party1 + '</td> \
-                            <td id="votes-d" class="right">' + can1 + '</td> \
-                          </tr> \
-                          <tr> \
-                            <td><span class="' + (party2 == 'GOP' ? 'label-r' : 'label-d') + '"></span>' + party2 + '</td> \
-                            <td id="votes-r" class="right">' + can2 + '</td> \
-                          </tr>\
-                        </tbody> \
-                      </table>';
+                    <div><span class="legendary" style="background-color:' + self.colorScale(d.properties.diffs_FLAG) + '">' + d3.format("+")(d.properties.diffs_DFL_DIFF) + '</span> point difference</div>';
                 } else {
                     return '<h4 id="title">' + d.properties.PCTNAME + '</h4>';
                 }
@@ -218,60 +185,7 @@ class Map {
             .transition()
             .duration(600)
             .style('fill', function(d) {
-                
-                //shaded shift ramps
-
-                // if (race == "1" || race == "8") {
-                //     if (d.properties.shifts_shift == "R") {
-                //         if (d.properties.shifts_shift_pct >= 10) {
-                //             return "#9C0004";
-                //         } else if (d.properties.shifts_shift_pct >= 5) {
-                //             return "#C22A22";
-                //         } else if (d.properties.shifts_shift_pct > 0) {
-                //             return "#F2614C";
-                //         }
-                //     } else {
-                //         return "#ededed";
-                //     }
-                // } else if (race == "2" || race == "3") {
-                //     if (d.properties.shifts_shift == "D") {
-                //         if (d.properties.shifts_shift_pct >= 10) {
-                //             return "#0D4673";
-                //         } else if (d.properties.shifts_shift_pct >= 5) {
-                //             return "#3580A3";
-                //         } else if (d.properties.shifts_shift_pct > 0) {
-                //             return "#67B4C2";
-                //         }
-                //     } else {
-                //         return "#ededed";
-                //     }
-                // }
-
-                //flipped ramps
-
-                // if (race == "1" || race == "8") {
-                //     if (d.properties.shifts_shift == "R" && d.properties.shifts_flipped == "Y") {
-                //         return "#C22A22";
-                //     } else {
-                //         return "#ededed";
-                //     }
-                // } else if (race == "2" || race == "3") {
-                //     if (d.properties.shifts_shift == "D" && d.properties.shifts_flipped == "Y") {
-                //         return "#3580A3";
-                //     } else {
-                //         return "#ededed";
-                //     }
-                // }
-
-               //win ramp
-           
-            //    if (d.properties.shifts_win18 == "R") {
-            //             return "#C22A22";
-            //         } else if (d.properties.shifts_win18 == "D") {
-            //             return "#3580A3";
-            //     }
-
-                return "#ededed";
+                return self.colorScale(d.properties.diffs_FLAG);
             });
 
         if (race == "1") {
@@ -424,58 +338,6 @@ class Map {
                 }
             });
 
-
-
-            //draw circles
-            // self.g.selectAll(".centroid").data(centroids)
-            //   .enter().append("circle")
-            //     .attr("class", "marker")
-            //     .attr("fill", function(d, i) {
-            //         if (features[i].properties.shifts_shift == "D") {
-            //             // if (features[i].properties.shifts_shift_pct < 0.05) { return "#D1E6E1"; }
-            //             // else if (features[i].properties.shifts_shift_pct < 0.1) { return "#67B4C2"; }
-            //             // else if (features[i].properties.shifts_shift_pct < 0.2) { return "#3580A3"; }
-            //             return "#7f98aa";
-            //         } else {
-            //             // if (features[i].properties.shifts_shift_pct < 0.05) { return "#F2AC93"; }
-            //             // else if (features[i].properties.shifts_shift_pct < 0.1) { return "#F2614C"; }
-            //             // else if (features[i].properties.shifts_shift_pct < 0.2) { return "#C22A22"; }
-            //             return "#8c0808";
-            //         }
-            //     })
-            //     .attr("stroke", function(d, i) {
-            //         if (features[i].properties.shifts_shift == "D") {
-            //             return "#7f98aa";
-            //         } else {
-            //             return "#8c0808";
-            //         }
-            //     })
-            //     .attr("stroke-width", "0")
-            //     .attr("r", function(d) {
-            //         if (race == "2") { return 0.4; }
-            //         else if (race == "3")  { return 0.2; }
-            //         else { return 0.7; }
-            //     })
-            //     .attr("cx", function (d, i){ 
-            //         var divider = 7;
-            //         if (race == "2") { divider = 2; }
-            //         else if (race == "3") { divider = 1; }
-
-            //         if (features[i].properties.shifts_shift == "D") {
-            //             return d[0] - divider;
-            //             // return d[0] - ((100 * features[i].properties.shifts_shift_pct) / divider);
-            //         } else {
-            //             return d[0] + divider;
-            //         }
-            //      })
-            //     .attr("cy", function (d, i){ 
-            //         var divider = 3;
-            //         if (race == "2") { divider = 2; }
-            //         else if (race == "3") { divider = 1; }
-
-            //         return (d[1] - divider);
-            //     });
-
                         //City labels
                         var marks = [{
                             long: -92.100485,
@@ -523,79 +385,6 @@ class Map {
                             name: "Red Wing"
                         }
                     ];
-
-            //draw shift lines
-            // self.g.selectAll(".centroid").data(centroids)
-            //     .enter().append("line")
-            //     .attr("stroke", function(d, i) {
-            //         if (features[i].properties.shifts_shift == "D") {
-            //             // if (features[i].properties.shifts_shift_pct < 0.05) { return "#D1E6E1"; }
-            //             // else if (features[i].properties.shifts_shift_pct < 0.1) { return "#67B4C2"; }
-            //             // else if (features[i].properties.shifts_shift_pct < 0.2) { return "#3580A3"; }
-            //             return "#0258A0";
-            //         } else {
-            //             // if (features[i].properties.shifts_shift_pct < 0.05) { return "#F2AC93"; }
-            //             // else if (features[i].properties.shifts_shift_pct < 0.1) { return "#F2614C"; }
-            //             // else if (features[i].properties.shifts_shift_pct < 0.2) { return "#C22A22"; }
-            //             return "#8c0808";
-            //         }
-            //         })
-            //     .attr("stroke-width", function(d) {
-            //         if (race == "3"){ return "0.1px"; }
-            //         else if (race == "2") { return "0.2px"; }
-            //         else { return "0.5px"; }
-            //     })
-            //     .attr("class", "shifter")
-            //     .attr("id", function(d, i) {
-            //         return "arrow" + features[i].properties.join;;
-            //     })
-            //     // .style("opacity",0)
-            //     .attr("x1", function(d) {
-            //         return d[0];
-            //     })
-            //     .attr("y1", function(d) {
-            //         return d[1];
-            //     })
-            //     .attr("x2", function(d, i) {
-            //         var divider = 3;
-            //         if (race == "2") { divider = 1; }
-            //         else if (race == "3") { divider = -0.5; }
-
-            //         if (features[i].properties.shifts_shift == "D") {
-            //             return d[0] - (divider + (features[i].properties.shifts_shift_pct / 3)) ;
-            //         } else {
-            //             return d[0] + ((divider + features[i].properties.shifts_shift_pct / 3));
-            //         }
-            //     })
-            //     .attr("y2", function(d, i) {
-            //         var divider = 3;
-            //         if (race == "2") { divider = 2; }
-            //         else if (race == "3") { divider = 1; }
-            //         else if (race == "8") { divider = 2; }
-
-            //         return (d[1] - divider);
-            //     })
-            //     .attr("marker-end", function(d, i) {
-            //         if (features[i].properties.shifts_shift == "D") {
-            //             return "url(#arrowD)";
-            //         } else {
-            //             return "url(#arrowR)";
-            //         }
-            //         });
-
-            //Draw city labels
-            // self.svg.selectAll("circle")
-            //     .data(marks)
-            //     .enter()
-            //     .append("circle")
-            //     .attr('class', 'mark')
-            //     .attr('width', 3)
-            //     .attr('height', 3)
-            //     .attr("r", "1.3px")
-            //     .attr("fill", "#333")
-            //     .attr("transform", function(d) {
-            //         return "translate(" + projection([d.long, d.lat]) + ")";
-            //     });
 
             self.g.append('g').attr('class', 'labelbg').selectAll("text")
             .data(marks)

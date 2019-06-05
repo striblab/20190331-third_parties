@@ -232,6 +232,25 @@ d3-tooltip-0, .tooltip {
   text-align:left;
 }
 
+.orange2 {
+  fill: #F2AF80;
+  background-color: #F2AF80;
+  color:#ffffff;
+}
+.green2 {
+  fill: #9EE384;
+  background-color: #9EE384;
+  color:#ffffff;
+}
+.purple1 {
+  background-color: #857AAA !important;
+  fill: #857AAA !important;
+  color: white !important;
+  pointer-events: all;
+  font-weight: bold;
+  stroke:#3f88c5;
+}
+
 @media (max-width:520px) {
   .map, #map1, #map2, #map3, #map8 {
     max-height:350px !important;
