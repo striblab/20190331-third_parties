@@ -630,9 +630,11 @@ h2 {
       stroke-width: 0.1px !important;
       stroke-linejoin: round !important;
       stroke-linecap: round !important;
+      cursor: default !important;
  }
   .precinct {
       stroke-width: 0.05px !important;
+      cursor: default !important;
  }
     #map1 .precinct {
         stroke-width: 0.8px !important;
